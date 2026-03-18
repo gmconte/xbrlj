@@ -144,9 +144,9 @@ public class Utils {
     }
 
     public static int asInt(String value) {
-        value = trim(value);
+        value = removeTags(value);
         try {
-            return Integer.parseInt(value.trim());
+            return Integer.parseInt(value);
         } catch (NumberFormatException e) {
             if (value.startsWith("\"") || value.startsWith("'")) {
                 value = value.substring(1);
@@ -155,6 +155,14 @@ public class Utils {
 
             throw e;
         }
+    }
+
+    public static boolean asBoolean(String value) {
+        return Boolean.parseBoolean(removeTags(value));
+    }
+
+    private static String removeTags(String value) {
+        return value.replaceAll("<.*?>", "").trim();
     }
 
     public static String trim(String value) {
@@ -198,7 +206,7 @@ public class Utils {
 
     public static LocalDate asDate(String value, String format) {
         DateTimeFormatter dateTimeFormatter = getDateTimeFormatter(format);
-        value = replaceHtmlChars(value);
+        value = removeTags(replaceHtmlChars(value));
         try {
             return LocalDate.parse(value, dateTimeFormatter);
         } catch (DateTimeParseException e) {
@@ -208,6 +216,7 @@ public class Utils {
     }
 
     public static LocalDate asDate(String value) {
+        value = removeTags(replaceHtmlChars(value));
         try {
             return LocalDate.parse(value);
         } catch (DateTimeParseException e) {
@@ -278,4 +287,5 @@ public class Utils {
         }
         return "{" + builder + "}";
     }
+
 }

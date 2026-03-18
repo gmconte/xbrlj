@@ -258,13 +258,13 @@ public final class Dei {
                     fiscalYear = Utils.asInt(value);
                     break;
                 case "DocumentAnnualReport":
-                    annualReport = Boolean.parseBoolean(value);
+                    annualReport = Utils.asBoolean(value);
                     break;
                 case "DocumentQuarterlyReport":
-                    quarterlyReport = Boolean.parseBoolean(value);
+                    quarterlyReport = Utils.asBoolean(value);
                     break;
                 case "DocumentTransitionReport":
-                    transitionReport = Boolean.parseBoolean(value);
+                    transitionReport = Utils.asBoolean(value);
                     break;
                 /* This is a must have */
                 case "DocumentType":
